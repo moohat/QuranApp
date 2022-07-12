@@ -1,7 +1,7 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
-const baseUrl = 'https://quran-endpoint.vercel.app/quran/1';
+const baseUrl = 'https://quran-endpoint.vercel.app/quran';
 
 const parseArray = listObject => {
   const data = [];
@@ -15,17 +15,14 @@ const parseArray = listObject => {
 };
 
 const ListAlquran = () => {
-  const [ayat, setAyat] = useState('');
+  const [surat, setSurat] = useState([]);
   const getData = async () => {
     const response = await axios.get(baseUrl);
-    const nama_surat = parseArray(response.data.data.asma.id.short);
-    console.log('response dari server: ', parseArray(nama_surat));
-    // setAyat(nama_surat);
-
-    // nama_surat.map(item => {
-    //   item.short;
-    //   console.log('ini surat', item.short);
-    // });
+    const nama_surat = response.data.data;
+    setSurat(nama_surat);
+    nama_surat.map((item, index) => {
+      return console.log('nama surat dari server: ', item.asma.id.short);
+    });
   };
   useEffect(() => {
     getData();
@@ -33,9 +30,13 @@ const ListAlquran = () => {
   }, []);
 
   return (
-    <View>
-      <Text>ListAlquran</Text>
-    </View>
+    <ScrollView showsVerticalScrollIndicator={false}>
+      {surat.map(item => {
+        return (
+          <Text key={item.id}>Ini adalah surat: {item.asma.id.short}</Text>
+        );
+      })}
+    </ScrollView>
   );
 };
 
