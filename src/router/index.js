@@ -1,7 +1,7 @@
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 // import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {ListAlquran, MainMenu, SplashScreen} from '../pages';
+import {DetailAyat, ListAlquran, MainMenu, SplashScreen} from '../pages';
 
 const Stack = createNativeStackNavigator();
 
@@ -21,6 +21,11 @@ const Router = () => {
       <Stack.Screen
         name="ListAlquran"
         component={ListAlquran}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="DetailAyat"
+        component={DetailAyat}
         options={{headerShown: false}}
       />
     </Stack.Navigator>
