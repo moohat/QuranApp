@@ -15,7 +15,15 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 var Sound = require('react-native-sound');
 Sound.setCategory('Playback');
 
-const audio = new Sound(
+//variable audio
+let audio;
+
+
+//pas audio di play, audio tidak bisa di pause, di tekan tomobolnya play audio lagi jadi numpuk audio nya
+const DetailAyat = ({route}) => {
+  const surat = route.params;
+  
+  audio = new Sound(
   'http://download.quranicaudio.com/quran/ahmed_ibn_3ali_al-3ajamy/001.mp3',
   null,
   error => {
@@ -32,8 +40,6 @@ const audio = new Sound(
     );
   },
 );
-const DetailAyat = ({route}) => {
-  const surat = route.params;
 
   const [surah, setSurah] = useState([]);
   const [dataAudio, setDataAudio] = useState('');
